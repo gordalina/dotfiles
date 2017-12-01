@@ -31,3 +31,11 @@
         #
         # Setting to git 2.0 default to suppress warning message
         default = simple
+[user]
+	name = Samuel Gordalina
+	email = samuel.gordalina@gmail.com
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
