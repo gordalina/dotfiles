@@ -95,6 +95,9 @@ defaults write com.apple.screencapture type -string "png"
 mkdir "${HOME}/Screenshots"
 defaults write com.apple.screencapture location -string "${HOME}/Screenshots"
 
+# Finder: disable items on desktop
+defaults write com.apple.finder CreateDesktop false
+
 # Finder: disable window animations and Get Info animations
 defaults write com.apple.finder DisableAllAnimations -bool true
 
