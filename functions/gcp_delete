@@ -1,0 +1,10 @@
+#!/bin/bash
+
+ACCOUNT=sam@gigster.com
+PROJECT_ID=$1
+
+gcloud projects add-iam-policy-binding $1 \
+  --member user:sam@gigster.com \
+  --role=roles/owner && \
+  
+echo 'y\n' | gcloud projects delete $1
