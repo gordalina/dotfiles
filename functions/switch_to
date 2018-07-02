@@ -1,0 +1,49 @@
+#!/bin/zsh
+
+function switch_to()
+{
+  if [ "$1" == "gde" ]; then
+    echo "using GDE"
+    export KOPS_STATE_STORE=s3://kops.hosting.gigster.com
+    export AWS_PROFILE=gigster-network
+    export VAULT_ADDR=https://vault.gde.gigsternetwork.com
+    echo "Please set VAULT_GITHUB_AUTH_TOKEN or VAULT_TOKEN"
+    kubectl config use-context hosting.gigster.com
+  elif [ "$1" == "gdeqa" ]; then
+    echo "using GDE QA"
+    export KOPS_STATE_STORE=s3://kops.gdeqa.gigsternetwork.com
+    export AWS_PROFILE=gigster-network-qa
+    export VAULT_ADDR=https://vault.gdeqa.gigsternetwork.com
+    export VAULT_SKIP_VERIFY=true
+    echo "Please set VAULT_GITHUB_AUTH_TOKEN or VAULT_TOKEN"
+    kubectl config use-context gdeqa.gigsternetwork.com
+  elif [ "$1" == "gdedev" ]; then
+    echo "using GDE DEV"
+    export KOPS_STATE_STORE=s3://kops.gdedev.gigsternetwork.com
+    export AWS_PROFILE=gigster-network-dev
+    export VAULT_ADDR=https://vault.gdedev.gigsternetwork.com
+    export VAULT_SKIP_VERIFY=true
+    echo "Please set VAULT_GITHUB_AUTH_TOKEN or VAULT_TOKEN"
+    kubectl config use-context gdedev.gigsternetwork.com
+  elif [ "$1" == "gdesam" ]; then
+    echo "using GDE SAM"
+    export KOPS_STATE_STORE=s3://kops.gdesam.gigsternetwork.com
+    export AWS_PROFILE=gigster-network-dev
+    export VAULT_ADDR=https://vault.gdesam.gigsternetwork.com
+    export VAULT_SKIP_VERIFY=true
+    echo "Please set VAULT_GITHUB_AUTH_TOKEN or VAULT_TOKEN"
+    kubectl config use-context gdedev.gigsternetwork.com
+  elif [ "$1" == "gigster" ]; then
+    echo "using Gigster Prod"
+    export KOPS_STATE_STORE=s3://kops.k8s.gigster.com
+    export AWS_PROFILE=gigster
+    unset VAULT_ADDR
+    kubectl config use-context k8s.gigster.com
+  elif [ "$1" == "gigsterqa" ]; then
+    echo "using Gigster QA"
+    export KOPS_STATE_STORE=s3://kops.qa.gigster.com
+    export AWS_PROFILE=gigster
+    unset VAULT_ADDR
+    kubectl config use-context qa.gigster.com
+  fi
+}
