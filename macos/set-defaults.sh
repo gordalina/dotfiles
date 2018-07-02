@@ -17,10 +17,10 @@ osascript -e 'tell application "System Preferences" to quit'
 defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode TwoButton
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "mars"
-sudo scutil --set HostName "mars"
-sudo scutil --set LocalHostName "mars"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "mars"
+sudo scutil --set ComputerName "zeus"
+sudo scutil --set HostName "zeus"
+sudo scutil --set LocalHostName "zeus"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "zeus"
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
