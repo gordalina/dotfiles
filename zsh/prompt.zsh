@@ -61,7 +61,29 @@ battery_status() {
   fi
 }
 
-export PROMPT=$'\n$(battery_status)in $(directory_name) $(git_dirty)$(need_push)\n› '
+kubernetes_context() {
+  kubectl config current-context
+}
+
+kubernetes_namespace() {
+  context=$(kubectl config current-context)
+  namespace=$(kubectl config view -o jsonpath="{.contexts[?(@.name == \"$context\")].context.namespace}")
+
+  if [ "$namespace" = "" ] || [ "$namespace" = "default" ]; then
+    namespace=""
+  else
+    namespace="${namespace}:"
+  fi
+
+  echo $namespace
+}
+
+kubernetes_prompt() {
+  echo "%{$fg_bold[green]%}$(kubernetes_namespace)$(kubernetes_context)%{$reset_color%}"
+}
+
+export PROMPT=$'\n$(kubernetes_prompt) in $(directory_name) $(git_dirty)$(need_push)\n› '
+
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
 }
