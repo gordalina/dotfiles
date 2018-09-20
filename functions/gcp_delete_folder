@@ -1,0 +1,10 @@
+#!/bin/bash
+
+ACCOUNT=${ACCOUNT-sam@gigster.com}
+FOLDER_ID=$1
+
+gcloud alpha resource-manager folders add-iam-policy-binding ${FOLDER_ID} \
+  --member user:${ACCOUNT} \
+  --role=roles/owner && \
+
+yes | gcloud alpha resource-manager folders delete ${FOLDER_ID}
