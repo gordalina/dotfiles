@@ -72,17 +72,29 @@ kubernetes_namespace() {
   if [ "$namespace" = "" ] || [ "$namespace" = "default" ]; then
     namespace=""
   else
-    namespace="${namespace}:"
+    namespace=":${namespace}"
   fi
 
   echo $namespace
 }
 
 kubernetes_prompt() {
-  echo "%{$fg_bold[green]%}$(kubernetes_namespace)$(kubernetes_context)%{$reset_color%}"
+  echo "%{$fg_bold[green]%}$(kubernetes_context)$(kubernetes_namespace)%{$reset_color%}"
 }
 
-export PROMPT=$'\n$(kubernetes_prompt) in $(directory_name) $(git_dirty)$(need_push)\n› '
+terraform_workspace() {
+  terraform workspace show
+}
+
+terraform_prompt() {
+  ws=$(terraform_workspace)
+
+  if [ "$ws" != "default" ]; then
+    echo " tf:%{$fg_bold[yellow]%}$ws%{$reset_color%}"
+  fi
+}
+
+export PROMPT=$'\n$(kubernetes_prompt)$(terraform_prompt) in $(directory_name) $(git_dirty)$(need_push)\n› '
 
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
