@@ -89,7 +89,7 @@ terraform_workspace() {
 terraform_prompt() {
   ws=$(terraform_workspace)
 
-  if [ "$ws" != "default" ]; then
+  if [ "$ws" != "default" ] && [ "$ws" != "" ]; then
     echo " tf:%{$fg_bold[yellow]%}$ws%{$reset_color%}"
   fi
 }
