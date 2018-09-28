@@ -3,6 +3,7 @@ cask_args appdir: '/Applications'
 tap 'homebrew/bundle'
 
 brew 'ack'
+brew 'asdf'
 brew 'coreutils'
 brew 'fzf'
 brew 'go'
