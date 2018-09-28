@@ -83,7 +83,7 @@ kubernetes_prompt() {
 }
 
 terraform_workspace() {
-  terraform workspace show
+  terraform workspace show 2>/dev/null
 }
 
 terraform_prompt() {
