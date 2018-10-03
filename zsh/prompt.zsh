@@ -79,7 +79,9 @@ kubernetes_namespace() {
 }
 
 kubernetes_prompt() {
-  echo "%{$fg_bold[green]%}$(kubernetes_context)$(kubernetes_namespace)%{$reset_color%}"
+  if [[ "$PS1_DISABLE_KUBERNETES" != "yes" ]]; then;
+    echo "%{$fg_bold[green]%}$(kubernetes_context)$(kubernetes_namespace)%{$reset_color%}"
+  fi
 }
 
 terraform_workspace() {
@@ -94,7 +96,19 @@ terraform_prompt() {
   fi
 }
 
-export PROMPT=$'\n$(kubernetes_prompt)$(terraform_prompt) in $(directory_name) $(git_dirty)$(need_push)\n› '
+prompt() {
+  K8S_PROMPT=$(kubernetes_prompt)
+  TERRAFORM_PROMPT=$(terraform_prompt)
+  IN_PROMPT=" in "
+
+  if [[ "$K8S_PROMPT" == "" ]] && [[ "$TERRAFORM_PROMPT" == "" ]]; then
+    IN_PROMPT=""
+  fi
+
+  echo "${K8S_PROMPT}${TERRAFORM_PROMPT}${IN_PROMPT}$(directory_name) $(git_dirty)$(need_push)"
+}
+
+export PROMPT=$'\n$(prompt)\n› '
 
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"

@@ -29,7 +29,7 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/c</string>
+	<string>/Applications</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -71,11 +71,11 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 476 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1058 573 796 473 0 0 1680 1027 </string>
+	<string>1854 1517 796 486 1680 252 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2965 252 1270 1417 1680 252 2560 1417 </string>
+	<string>0 23 1680 1004 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 286 810 577 0 0 1680 1028 </string>
+	<string>2120 691 810 577 1680 252 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -737,6 +737,8 @@
 	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -746,14 +748,16 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-06-25T23:31:15Z</date>
+	<date>2018-10-01T05:27:47Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>ShowFullScreenTabBar</key>
 	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.1.6</string>
+	<string>3.2.1</string>
 </dict>
 </plist>
