@@ -7,21 +7,23 @@ rm -fr $FFMPEG_INPUT
 FILES=($(ls -ltr | grep -v total | awk '{ print $9 }'))
 
 for FILE in $FILES; do
-  echo "file './$FILE'" >> $FFMPEG_INPUT
+  echo "file '$(pwd)/$FILE'" >> $FFMPEG_INPUT
 done
 
-ffmpeg              \
-  -safe 0           \
-  -y                \
-  -f concat         \
-  -i __ffmpeg_input \
-  -c copy           \
-  -map 0:v          \
-  -map 0:a          \
-  -map 0:3          \
-  -copy_unknown     \
-  -tag:2            \
-  gpmd              \
-  output.mp4
+ffmpeg               \
+  -safe 0            \
+  -y                 \
+  -f concat          \
+  -i "$FFMPEG_INPUT" \
+  -c copy            \
+  -map 0:v           \
+  -map 0:a           \
+  -map 0:3           \
+  -map 0:4           \
+  -copy_unknown      \
+  -tag:2             \
+  -tag:4             \
+  gpmd               \
+  "$(pwd)/output.mp4"
 
 rm -fr $FFMPEG_INPUT
