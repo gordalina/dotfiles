@@ -1,1 +1,1 @@
-ln -s ~/.dotfiles/phoenix/src/index.js ~/.phoenix.js
+ln -s ~/.dotfiles/phoenix/src ~/.phoenix.js
