@@ -1,5 +1,5 @@
 # Enable performance monitoring (also uncomment last line)
-# zmodload zsh/zprof
+#zmodload zsh/zprof
 
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
@@ -53,4 +53,4 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
 # Enable performance monitoring (also uncomment last line)
-# zprof
+#zprof
