@@ -8,6 +8,9 @@ atom.symlink/storage
 atom.symlink/themes
 atom.symlink/blob-store
 atom.symlink/recovery
+atom.symlink/.atom-socket-secret-*
+
+config.symlink/configstore/update-notifier-npm.json
 
 git/gitconfig.local.symlink
 .DS_Store
