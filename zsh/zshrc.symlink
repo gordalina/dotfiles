@@ -54,6 +54,3 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 # Enable performance monitoring (also uncomment last line)
 # zprof
-
-export PATH=/Users/sam/.local/bin:$PATH
-export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
