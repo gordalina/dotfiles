@@ -1,6 +1,4 @@
 autoload colors && colors
-# cheers, @ehrenmurdick
-# http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 
 if (( $+commands[git] ))
 then
@@ -62,11 +60,11 @@ battery_status() {
 }
 
 kubernetes_context() {
-  kubectl config current-context
+  kubectl config current-context 2> /dev/null
 }
 
 kubernetes_namespace() {
-  context=$(kubectl config current-context)
+  context=$(kubectl config current-context 2> /dev/null)
   namespace=$(kubectl config view -o jsonpath="{.contexts[?(@.name == \"$context\")].context.namespace}")
 
   if [ "$namespace" = "" ] || [ "$namespace" = "default" ]; then
@@ -101,7 +99,7 @@ prompt() {
   TERRAFORM_PROMPT=$(terraform_prompt)
   IN_PROMPT=" in "
 
-  if [[ "$K8S_PROMPT" == "" ]] && [[ "$TERRAFORM_PROMPT" == "" ]]; then
+  if [ "${K8S_PROMPT}${TERRAFORM_PROMPT}" = "" ]; then
     IN_PROMPT=""
   fi
 
