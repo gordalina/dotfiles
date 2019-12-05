@@ -24,6 +24,7 @@ brew 'roundup'
 brew 'sift'
 brew 'spaceman-diff'
 brew 'spark'
+brew 'terraform'
 brew 'unrar'
 
 cask '1password'
