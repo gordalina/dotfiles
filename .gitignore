@@ -11,6 +11,7 @@ atom.symlink/recovery
 atom.symlink/.atom-socket-secret-*
 
 config.symlink/configstore/update-notifier-npm.json
+config.symlink/gcloud
 
 git/gitconfig.local.symlink
 .DS_Store
