@@ -12,6 +12,8 @@ atom.symlink/.atom-socket-secret-*
 
 config.symlink/configstore/update-notifier-npm.json
 config.symlink/gcloud
+config.symlink/exercism
+config.symlink/htop
 
 git/gitconfig.local.symlink
 .DS_Store
