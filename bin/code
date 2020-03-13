@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Usage: vscode <folder>
+#
+
+set -e
+
+FOLDER=${1:-.}
+open -a /Applications/Visual\ Studio\ Code.app "${FOLDER}"
