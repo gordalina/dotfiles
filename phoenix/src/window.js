@@ -1,7 +1,7 @@
-function setFrame({x, y, width, height, window = Window.focused(), screen = Window.focused().screen()}) {
+function setFrame({ x, y, width, height, window = Window.focused(), screen = Window.focused().screen() }) {
   const frame = screen.flippedVisibleFrame();
 
-  window.setFrame ({
+  window.setFrame({
     x: frame.x + (frame.width * x),
     y: frame.y + (frame.height * y),
     width: frame.width * width,
@@ -9,7 +9,11 @@ function setFrame({x, y, width, height, window = Window.focused(), screen = Wind
   });
 }
 
-function moveToScreen({window = Window.focused(), offset = 0}) {
+function setAbsoluteFrame({ x, y, width, height, window = Window.focused(), screen = Window.focused().screen() }) {
+  window.setFrame({ x: x, y: y, width: width, height: height });
+}
+
+function moveToScreen({ window = Window.focused(), offset = 0 }) {
   const windowFrame = window.frame();
   const screenFrame = window.screen().flippedVisibleFrame();
 
@@ -19,6 +23,6 @@ function moveToScreen({window = Window.focused(), offset = 0}) {
     width: Math.abs(windowFrame.width / screenFrame.width),
     height: Math.abs(windowFrame.height / screenFrame.height),
     window,
-    screen: getScreenFromOffset({window, offset}),
+    screen: getScreenFromOffset({ window, offset }),
   });
 }

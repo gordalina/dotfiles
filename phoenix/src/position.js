@@ -1,22 +1,44 @@
 function getPosition(name) {
   switch (name) {
-    /* SIDES */
+    /* Sides */
     case 'top': return { x: 0, y: 0, width: 1, height: .5 };
     case 'right': return { x: .5, y: 0, width: .5, height: 1 };
     case 'bottom': return { x: 0, y: .5, width: 1, height: .5 };
     case 'left': return { x: 0, y: 0, width: .5, height: 1 };
 
-    /* CORNERS */
+    /* Corners */
     case 'top-left': return { x: 0, y: 0, width: .5, height: .5 };
     case 'top-right': return { x: .5, y: 0, width: .5, height: .5 };
     case 'bottom-right': return { x: .5, y: .5, width: .5, height: .5 };
     case 'bottom-left': return { x: 0, y: .5, width: .5, height: .5 };
 
-    /* THIRDS */
-    case 'left-1': return { x: 0, y: 0, width: 1/3, height: 1 };
-    case 'left-2': return { x: 0, y: 0, width: 2/3, height: 1 };
-    case 'right-1': return { x: 2/3, y: 0, width: 1/3, height: 1 };
-    case 'right-2': return { x: 1/3, y: 0, width: 2/3, height: 1 };
+    /* Thirds */
+    case 'left-third': return { x: 0, y: 0, width: 1 / 3, height: 1 };
+    case 'center-third': return { x: 1 / 3, y: 0, width: 1 / 3, height: 1 };
+    case 'right-third': return { x: 2 / 3, y: 0, width: 1 / 3, height: 1 };
+  }
+}
+
+function getAbsolutePosition(name) {
+  const window = Window.focused().frame();
+  const screen = Window.focused().screen().frame()
+  const frame = Window.focused().screen().flippedVisibleFrame();
+
+  switch (name) {
+    /* Halves */
+    case 'bottom-half': return {
+      x: window.x,
+      y: window.y + screen.height / 2,
+      width: window.width,
+      height: screen.height / 2
+    };
+
+    case 'top-half': return {
+      x: window.x,
+      y: frame.y,
+      width: window.width,
+      height: screen.height / 2
+    };
   }
 }
 
