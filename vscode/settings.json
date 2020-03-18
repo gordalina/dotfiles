@@ -8,5 +8,6 @@
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "explorer.confirmDragAndDrop": false,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.multiCursorModifier": "ctrlCmd"
 }
