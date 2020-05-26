@@ -94,16 +94,27 @@ terraform_prompt() {
   fi
 }
 
-prompt() {
-  K8S_PROMPT=$(kubernetes_prompt)
-  TERRAFORM_PROMPT=$(terraform_prompt)
-  IN_PROMPT=" in "
+gcp_project() {
+  gcloud config get-value project 2>/dev/null
+}
 
-  if [ "${K8S_PROMPT}${TERRAFORM_PROMPT}" = "" ]; then
+gcp_prompt() {
+  project=$(gcp_project)
+
+  if [ "$project" != "" ]; then
+    echo " gcp:%{$fg_bold[yellow]%}$project%{$reset_color%}"
+  fi
+}
+
+prompt() {
+  IN_PROMPT=" in "
+  TOOLS_PROMPT="$(kubernetes_prompt)$(gcp_prompt)$(terraform_prompt)"
+
+  if [ "${TOOLS_PROMPT}" = "" ]; then
     IN_PROMPT=""
   fi
 
-  echo "${K8S_PROMPT}${TERRAFORM_PROMPT}${IN_PROMPT}$(directory_name) $(git_dirty)$(need_push)"
+  echo "${TOOLS_PROMPT}${IN_PROMPT}$(directory_name) $(git_dirty)$(need_push)"
 }
 
 export PROMPT=$'\n$(prompt)\n› '
