@@ -108,7 +108,7 @@ gcp_prompt() {
 
 prompt() {
   IN_PROMPT=" in "
-  TOOLS_PROMPT="$(kubernetes_prompt)$(gcp_prompt)$(terraform_prompt)"
+  TOOLS_PROMPT="$(kubernetes_prompt)$(terraform_prompt)"
 
   if [ "${TOOLS_PROMPT}" = "" ]; then
     IN_PROMPT=""
