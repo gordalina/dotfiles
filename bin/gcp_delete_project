@@ -5,6 +5,6 @@ PROJECT_ID=$1
 
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
   --member user:${ACCOUNT} \
-  --role=roles/owner && \
+  --role=roles/owner || true
 
 yes | gcloud projects delete ${PROJECT_ID}
