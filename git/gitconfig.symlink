@@ -16,7 +16,7 @@
   ui = true
 [core]
   excludesfile = ~/.gitignore
-  editor = vim
+	editor = code --wait
 [apply]
   whitespace = nowarn
 [mergetool]
@@ -34,8 +34,11 @@
 [user]
 	name = Samuel Gordalina
 	email = samuel.gordalina@gmail.com
+	signingkey = A86546079C83713A
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[commit]
+	gpgsign = true
