@@ -95,6 +95,9 @@ defaults write com.apple.screencapture type -string "png"
 mkdir "${HOME}/Screenshots"
 defaults write com.apple.screencapture location -string "${HOME}/Screenshots"
 
+# Do not show the thumbnail preview after taking a screenshot
+defaults write com.apple.screencapture show-thumbnail -bool FALSE
+
 # Finder: disable items on desktop
 defaults write com.apple.finder CreateDesktop false
 
