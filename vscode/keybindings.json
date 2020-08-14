@@ -10,6 +10,16 @@
     "command": "workbench.action.showAllSymbols"
   },
   {
+    "key": "cmd+k u",
+    "command": "editor.action.transformToUppercase",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+k l",
+    "command": "editor.action.transformToLowercase",
+    "when": "editorTextFocus"
+  },
+  {
     "key": "cmd+t",
     "command": "workbench.action.terminal.toggleTerminal"
   },
