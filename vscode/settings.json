@@ -21,5 +21,6 @@
     "clang-format.language.javascript.enable": false,
     "eslint.alwaysShowStatus": true,
     "eslint.format.enable": true,
+    "editor.fontFamily": "Monaco, 'Courier New', monospace",
     "editor.formatOnSave": true
 }
