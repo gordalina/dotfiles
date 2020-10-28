@@ -114,10 +114,17 @@ prompt() {
     IN_PROMPT=""
   fi
 
+  p_pr='%(?.%F{blue}.%F{red})>%f'
+
+
   echo "${TOOLS_PROMPT}${IN_PROMPT}$(directory_name) $(git_dirty)$(need_push)"
 }
 
-export PROMPT=$'\n$(prompt)\n› '
+two_line_prompt() {
+  echo "\n$(prompt)\n%(?.%F{white}.%F{red})›%f "
+}
+
+export PROMPT=$'$(two_line_prompt)'
 
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
