@@ -1,26 +1,29 @@
 {
-    "editor.tabSize": 2,
-    "editor.wordWrap": "wordWrapColumn",
-    "window.zoomLevel": 0,
+    "clang-format.language.javascript.enable": false,
+    "editor.fontFamily": "Monaco, 'Courier New', monospace",
     "editor.fontSize": 15,
+    "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.tabSize": 2,
+    "editor.wordWrapColumn": 80,
+    "editor.wordWrap": "wordWrapColumn",
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
-    "explorer.confirmDragAndDrop": false,
-    "editor.multiCursorModifier": "ctrlCmd",
-    "explorer.confirmDelete": false,
+    "typescript.updateImportsOnFileMove.enabled": "never",
+    "window.zoomLevel": 0,
+    "[elixir]": {
+        "editor.defaultFormatter": "JakeBecker.elixir-ls"
+    },
     "[javascript]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "[typescript]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-    },
-    "typescript.updateImportsOnFileMove.enabled": "never",
-    "editor.wordWrapColumn": 80,
-    "clang-format.language.javascript.enable": false,
-    "eslint.alwaysShowStatus": true,
-    "eslint.format.enable": true,
-    "editor.fontFamily": "Monaco, 'Courier New', monospace",
-    "editor.formatOnSave": true
+    }
 }
