@@ -47,13 +47,13 @@
 	<key>Hotkey</key>
 	<true/>
 	<key>HotkeyChar</key>
-	<integer>92</integer>
+	<integer>124</integer>
 	<key>HotkeyCode</key>
 	<integer>42</integer>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>HotkeyModifiers</key>
-	<integer>1048840</integer>
+	<integer>1179922</integer>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
@@ -106,13 +106,13 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 363 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 8 1280 1010 0 0 1680 1027 </string>
+	<string>3840 825 810 592 2560 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 435 810 592 0 0 1680 1027 </string>
+	<string>2560 0 2560 1417 2560 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>0 8 1680 1010 0 0 1680 1027 </string>
+	<string>6400 0 1280 1417 5120 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>5793 1696 810 592 4513 871 2560 1417 </string>
+	<string>570 -615 810 592 170 -1050 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
 	<string>252 111 530 416 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -1381,21 +1381,21 @@
 	<key>NoSyncFrame_SessionsPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{2162, 900}, {2560, 1440}}</string>
+		<string>{{5120, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{2431, 1495}</string>
+		<string>{5389, 595}</string>
 	</dict>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{5120, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{5389, 746}</string>
+		<string>{5389, 747}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>A29EBAEC-1048-41F8-BE23-9E886EB5BCBB</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>131</integer>
+	<integer>157</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2250,7 +2250,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-08-29T18:32:49Z</date>
+	<date>2020-11-12T18:29:05Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
