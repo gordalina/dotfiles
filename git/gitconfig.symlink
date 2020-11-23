@@ -34,12 +34,13 @@
 [user]
 	name = Samuel Gordalina
 	email = samuel.gordalina@gmail.com
+	signingkey = CBF79D00FA50E914
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
-# [commit]
-#	gpgsign = true
+[commit]
+	gpgsign = true
 [rerere]
 	enabled = true
