@@ -183,10 +183,6 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 10
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 
-# Run the screensaver if we're in the bottom-left hot corner.
-defaults write com.apple.dock wvous-bl-corner -int 5
-defaults write com.apple.dock wvous-bl-modifier -int 0
-
 # Hide Safari's bookmark bar.
 defaults write com.apple.Safari ShowFavoritesBar -bool false
 
@@ -202,14 +198,14 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Dock, Dashboard, and hot corners                                            #
 ###############################################################################
 
+# Display the dock on the left
+defaults write com.apple.dock orientation left
+
 # Enable highlight hover effect for the grid view of a stack (Dock)
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
 # Set the icon size of Dock items to 36 pixels
-defaults write com.apple.dock tilesize -int 24
-
-# Change minimize/maximize window effect
-defaults write com.apple.dock mineffect -string "scale"
+defaults write com.apple.dock tilesize -int 48
 
 # Minimize windows into their application’s icon
 defaults write com.apple.dock minimize-to-application -bool true
@@ -288,5 +284,15 @@ sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (
 # defaults write com.apple.dock wvous-tr-corner -int 4
 # defaults write com.apple.dock wvous-tr-modifier -int 0
 # Bottom left screen corner → Put display to sleep
-defaults write com.apple.dock wvous-br-corner -int 10
-defaults write com.apple.dock wvous-bl-modifier -int 0
+# defaults write com.apple.dock wvous-br-corner -int 10
+# defaults write com.apple.dock wvous-bl-modifier -int 0
+
+# Do not display siri icon in menu bar
+defaults write com.apple.siri StatusMenuVisible 0
+
+
+# Set font subpixel antialiasing (0 disabled, 1 light, 2 medium, 3 strong)
+defaults -currentHost write -globalDomain AppleFontSmoothing -int 1
+
+# Disable Font Smoothing (if you only have retina displays)
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool YES

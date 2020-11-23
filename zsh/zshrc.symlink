@@ -52,8 +52,9 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-
 # Enable performance monitoring (also uncomment last line)
 #zprof
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source /usr/local/opt/asdf/asdf.sh
