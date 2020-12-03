@@ -41,6 +41,16 @@ defaults write com.apple.systemuiserver menuExtras -array \
 	"/System/Library/CoreServices/Menu Extras/Battery.menu" \
 	"/System/Library/CoreServices/Menu Extras/Clock.menu"
 
+# Menu Bar: Set the clock configuration
+defaults write com.apple.menuextra.clock ShowAMPM -int 0
+defaults write com.apple.menuextra.clock ShowDayOfMonth -int 0
+defaults write com.apple.menuextra.clock ShowDayOfWeek -int 0
+defaults write com.apple.menuextra.clock DateFormat -string "h:mm a"
+defaults write com.apple.menuextra.clock ShowSeconds -int 0
+
+# Menu Bar: Remove Siri
+defaults write com.apple.Siri StatusMenuVisible -int 0
+
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
