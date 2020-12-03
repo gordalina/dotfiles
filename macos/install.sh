@@ -5,3 +5,5 @@
 
 echo "› sudo softwareupdate -i -a"
 sudo softwareupdate -i -a
+
+source default-app-extensions.sh
