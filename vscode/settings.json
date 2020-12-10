@@ -1,6 +1,6 @@
 {
     "clang-format.language.javascript.enable": false,
-    "editor.fontFamily": "Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "Monaco",
     "editor.fontSize": 15,
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
@@ -21,7 +21,7 @@
     "terminal.integrated.shell.osx": "/bin/zsh",
     "terminal.integrated.fontFamily": "Monaco",
     "terminal.integrated.fontSize": 15,
-
+    "workbench.panel.defaultLocation": "right",
     "[elixir]": {
         "editor.defaultFormatter": "JakeBecker.elixir-ls"
     },
