@@ -1,6 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
+tap 'shivammathur/php'
 
 brew 'ack'
 brew 'asdf'
@@ -36,6 +37,7 @@ brew 'pinentry-mac'
 brew 'pkg-config'
 brew 'readline'
 brew 'sift'
+brew 'shivammathur/php/php@8.0'
 brew 'spaceman-diff'
 brew 'spark'
 brew 'squashfs'
