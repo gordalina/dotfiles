@@ -20,15 +20,37 @@ git_dirty() {
     then
       echo "on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
     else
-      echo "on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
+      if $(git_in_rebase)
+      then
+        rebase="%{$reset_color%} rebasing onto %{$fg_bold[magenta]%}$($git rev-parse --short HEAD)"
+        echo "on %{$fg_bold[red]%}$(git_rebasing_branch)${rebase}%{$reset_color%}"
+      else
+        echo "on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
+      fi
     fi
   fi
 }
 
-git_prompt_info () {
- ref=$($git symbolic-ref HEAD 2>/dev/null) || return
-# echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
- echo "${ref#refs/heads/}"
+git_in_rebase() {
+  test -d "$($git rev-parse --git-path rebase-merge 2>/dev/null)" || \
+    test -d "$($git rev-parse --git-path rebase-apply 2>/dev/null)"
+}
+
+git_rebasing_branch() {
+  for location in rebase-merge rebase-apply; do
+    path=$($git rev-parse --git-path ${location})
+    if test -d ${path}; then
+      revision=$(<${path}/head-name)
+      echo ${revision##refs/heads/}
+      return 0
+    fi
+  done
+}
+
+
+git_prompt_info() {
+  ref=$($git symbolic-ref HEAD 2>/dev/null) || return
+  echo "${ref#refs/heads/}"
 }
 
 # This assumes that you always have an origin named `origin`, and that you only
@@ -37,7 +59,7 @@ git_prompt_info () {
 need_push () {
   if [ $($git rev-parse --is-inside-work-tree 2>/dev/null) ]
   then
-    number=$($git cherry -v origin/$(git symbolic-ref --short HEAD) 2>/dev/null | wc -l | bc)
+    number=$($git cherry -v origin/$(git symbolic-ref --short HEAD 2>/dev/null) 2>/dev/null | wc -l | bc)
 
     if [[ $number == 0 ]]
     then
