@@ -72,3 +72,4 @@ cask 'visual-studio-code'
 cask 'zoomus'
 
 mas "Irvue", id: 1039633667
+mas "Postico", id: 1031280567

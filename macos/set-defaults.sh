@@ -45,7 +45,7 @@ defaults write com.apple.systemuiserver menuExtras -array \
 defaults write com.apple.menuextra.clock ShowAMPM -int 0
 defaults write com.apple.menuextra.clock ShowDayOfMonth -int 0
 defaults write com.apple.menuextra.clock ShowDayOfWeek -int 0
-defaults write com.apple.menuextra.clock DateFormat -string "h:mm a"
+defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM h:mm a"
 defaults write com.apple.menuextra.clock ShowSeconds -int 0
 
 # Menu Bar: Remove Siri
@@ -306,3 +306,7 @@ defaults -currentHost write -globalDomain AppleFontSmoothing -int 1
 
 # Disable Font Smoothing (if you only have retina displays)
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool YES
+
+for prog in (Dock Finder SystemUIServer); do
+  killall $prog
+done
