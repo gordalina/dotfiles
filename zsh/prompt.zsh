@@ -81,26 +81,18 @@ battery_status() {
   fi
 }
 
-kubernetes_context() {
-  kubectl config current-context 2> /dev/null
-}
-
-kubernetes_namespace() {
-  context=$(kubectl config current-context 2> /dev/null)
-  namespace=$(kubectl config view -o jsonpath="{.contexts[?(@.name == \"$context\")].context.namespace}")
-
-  if [ "$namespace" = "" ] || [ "$namespace" = "default" ]; then
-    namespace=""
-  else
-    namespace=":${namespace}"
-  fi
-
-  echo $namespace
-}
-
 kubernetes_prompt() {
   if [[ "$PS1_DISABLE_KUBERNETES" != "yes" ]]; then;
-    echo "%{$fg_bold[green]%}$(kubernetes_context)$(kubernetes_namespace)%{$reset_color%}"
+    context=$(kubectl config current-context 2> /dev/null)
+    namespace=$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)
+
+    if [ "$namespace" = "" ] || [ "$namespace" = "default" ]; then
+      namespace=""
+    else
+      namespace="%{$reset_color%}:%{$fg_bold[yellow]%}${namespace}%{$reset_color%}"
+    fi
+
+    echo "%{$fg_bold[green]%}${context}${namespace}%{$reset_color%}"
   fi
 }
 
@@ -109,15 +101,20 @@ terraform_workspace() {
 }
 
 terraform_prompt() {
-  ws=$(terraform_workspace)
+  if [ -d .terraform ]
+  then
+    ws=$(terraform_workspace)
 
-  if [ "$ws" != "default" ] && [ "$ws" != "" ]; then
-    echo " tf:%{$fg_bold[yellow]%}$ws%{$reset_color%}"
+    if [ "$ws" != "default" ] && [ "$ws" != "" ]; then
+      echo " tf:%{$fg_bold[yellow]%}$ws%{$reset_color%}"
+    fi
   fi
 }
 
 gcp_project() {
-  gcloud config get-value project 2>/dev/null
+  cat ~/.config/gcloud/configurations/config_$(cat ~/.config/gcloud/active_config) \
+    | grep project \
+    | sed "s/project = //" 2>/dev/null
 }
 
 gcp_prompt() {
@@ -130,7 +127,8 @@ gcp_prompt() {
 
 prompt() {
   IN_PROMPT=" in "
-  TOOLS_PROMPT="$(kubernetes_prompt)$(terraform_prompt)"
+  TOOLS_PROMPT="$(kubernetes_prompt)$(gcp_prompt)$(terraform_prompt)"
+  # TOOLS_PROMPT=""
 
   if [ "${TOOLS_PROMPT}" = "" ]; then
     IN_PROMPT=""

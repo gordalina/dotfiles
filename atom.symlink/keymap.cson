@@ -1,3 +1,0 @@
-'atom-text-editor':
-  'alt-shift-down': 'editor:add-selection-below'
-  'alt-shift-up': 'editor:add-selection-above'
