@@ -84,13 +84,14 @@ battery_status() {
 kubernetes_prompt() {
   if [[ "$PS1_DISABLE_KUBERNETES" != "yes" ]]; then;
     context=$(kubectl config current-context 2> /dev/null)
-    namespace=$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)
+    # namespace=$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)
 
-    if [ "$namespace" = "" ] || [ "$namespace" = "default" ]; then
-      namespace=""
-    else
-      namespace="%{$reset_color%}:%{$fg_bold[yellow]%}${namespace}%{$reset_color%}"
-    fi
+    # if [ "$namespace" = "" ] || [ "$namespace" = "default" ]; then
+    #   namespace=""
+    # else
+    #   namespace="%{$reset_color%}:%{$fg_bold[yellow]%}${namespace}%{$reset_color%}"
+    # fi
+    namespace=""
 
     echo "%{$fg_bold[green]%}${context}${namespace}%{$reset_color%}"
   fi
@@ -103,7 +104,7 @@ terraform_workspace() {
 terraform_prompt() {
   if [ -d .terraform ]
   then
-    ws=$(terraform_workspace)
+    ws=$(cat .terraform/environment 2>/dev/null)
 
     if [ "$ws" != "default" ] && [ "$ws" != "" ]; then
       echo " tf:%{$fg_bold[yellow]%}$ws%{$reset_color%}"
@@ -128,7 +129,6 @@ gcp_prompt() {
 prompt() {
   IN_PROMPT=" in "
   TOOLS_PROMPT="$(kubernetes_prompt)$(gcp_prompt)$(terraform_prompt)"
-  # TOOLS_PROMPT=""
 
   if [ "${TOOLS_PROMPT}" = "" ]; then
     IN_PROMPT=""
