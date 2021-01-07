@@ -1,0 +1,10 @@
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[kubernetes]
+disabled = false
+symbol = ""
+style = "green bold"
