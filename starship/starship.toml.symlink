@@ -4,7 +4,17 @@ disabled = true
 [gcloud]
 disabled = true
 
+[git_branch]
+symbol = ""
+
 [kubernetes]
 disabled = false
 symbol = ""
 style = "green bold"
+
+[status]
+disabled = false
+
+[terraform]
+format = "via $symbol[$workspace]($style) "
+symbol = "tf:"
