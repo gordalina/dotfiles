@@ -7,7 +7,6 @@
 "~/src/dotfiles" = { url = "git@github.com:gordalina/dotfiles.git", ref = "main" }
 
 [dotfiles]
-"~/.Brewfile" = {}
 "~/.config" = {}
 "~/.hushlogin" = {}
 "~/.ssh" = {}

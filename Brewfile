@@ -32,3 +32,37 @@ cask "raycast"
 cask "secretive"
 # Open-source code editor
 cask "visual-studio-code"
+
+
+cask "1password-cli", args: { appdir: "/Applications" }
+cask "alcove"
+cask "arc"
+cask "backblaze", args: { appdir: "/Applications" }
+cask "cleanshot", args: { appdir: "/Applications" }
+cask "cryptomator"
+cask "dangerzone"
+cask "font-fira-code-nerd-font", args: { appdir: "/Applications" }
+cask "font-fira-mono-nerd-font", args: { appdir: "/Applications" }
+cask "ghostty"
+cask "google-drive", args: { appdir: "/Applications" }
+
+cask "loom"
+cask "lulu", args: { appdir: "/Applications" }
+cask "notion", args: { appdir: "/Applications" }
+
+cask "oversight"
+cask "raycast", args: { appdir: "/Applications" }
+cask "secretive"
+
+cask "signal", args: { appdir: "/Applications" }
+cask "slack", args: { appdir: "/Applications" }
+cask "steam"
+
+cask "tailscale-app"
+cask "utm"
+cask "lm-studio"
+cask "claude"
+
+cask "visual-studio-code", args: { appdir: "/Applications" }
+cask "vlc", args: { appdir: "/Applications" }
+cask "zoom", args: { appdir: "/Applications" }
