@@ -1,0 +1,15 @@
+theme = Dracula
+
+font-family = Monaco
+font-size = 16
+font-thicken = true
+
+background-opacity = 0.85
+background-blur-radius = 20
+
+window-padding-x = 16
+window-padding-y = 8
+
+macos-titlebar-style = tabs
+
+auto-update = download
