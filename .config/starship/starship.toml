@@ -1,0 +1,51 @@
+ommand_timeout = 1000
+format = """
+${custom.arch}\
+${custom.kubernetes}\
+$all
+"""
+
+[aws]
+disabled = true
+
+[directory]
+format = "in [$path]($style)[$read_only]($read_only_style) "
+
+[docker_context]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[custom.gcloud]
+command = 'gcloud config get project'
+format = 'on [$output](bright-blue bold) '
+when = '''test "$(gcloud config get project)" != "gordalina"'''
+
+[git_branch]
+symbol = ""
+
+[kubernetes]
+disabled = true
+
+[custom.kubernetes]
+command = "kubectl config current-context"
+format = "[$output](green bold) "
+when = '''test "$(kubectl config current-context)" != "kind"'''
+
+[status]
+disabled = false
+
+[terraform]
+format = "via [$workspace]($style) "
+
+[custom.arch]
+command = "uname -m"
+format = "[$output](red) "
+when = '''test "$(uname -m)" = "x86_64"'''
+
+[elixir]
+symbol = ''
+
+[nodejs]
+symbol = ''
