@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if [ "$1" = "getall" ]; then
+  kubectl get crd,pods,svc -A
+else
+  kubectl $@;
+fi
