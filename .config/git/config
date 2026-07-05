@@ -1,0 +1,15 @@
+[user]
+    name = Samuel Gordalina
+    email = samuel.gordalina@gmail.com
+    signingkey = /Users/sg/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/PublicKeys/d9a1164dc2146802ed96aeb12757249d.pub
+
+[commit]
+    gpgsign = true
+
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/.config/git/allowed_signers
+
+[alias]
+    unstash = "stash pop"
