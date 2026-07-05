@@ -34,6 +34,7 @@ cask "secretive"
 cask "visual-studio-code"
 
 
+cask "1password", args: { appdir: "/Applications" }
 cask "1password-cli", args: { appdir: "/Applications" }
 cask "alcove"
 cask "arc"
