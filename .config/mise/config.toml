@@ -1,0 +1,22 @@
+[bootstrap.packages]
+#"brew:postgresql@17" = "latest"
+#"brew:ffmpeg" = "latest"
+#"mas:497799835" = "latest"
+
+[bootstrap.repos]
+"~/src/dotfiles" = { url = "git@github.com:gordalina/dotfiles.git", ref = "main" }
+
+[dotfiles]
+"~/.config" = {}
+"~/.ssh" = {}
+"~/.zshenv" = {}
+
+[settings]
+experimental = true
+dotfiles.root = "~/src/dotfiles"
+dotfiles.default_mode = "symlink"
+
+[tools]
+claude-code = "latest"
+elixir = "1.19.5"
+erlang = "28.5.0.3"
