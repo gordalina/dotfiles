@@ -10,6 +10,7 @@
 "~/.config" = {}
 "~/.ssh" = {}
 "~/.zshenv" = {}
+"~/bin" = {}
 
 [settings]
 experimental = true
