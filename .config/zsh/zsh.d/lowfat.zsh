@@ -1,0 +1,1 @@
+eval "$(lowfat shell-init zsh)"
