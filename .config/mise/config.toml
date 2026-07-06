@@ -12,6 +12,7 @@
 "~/.ssh" = {}
 "~/.zshenv" = {}
 "~/bin" = {}
+"~/.Brewfile" = { source = "~/src/dotfiles/Brewfile" }
 
 [settings]
 experimental = true

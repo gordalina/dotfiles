@@ -6,10 +6,22 @@ brew "chezmoi"
 brew "duti"
 # Modern, maintained replacement for ls
 brew "eza"
+# Terminal JSON viewer
+brew "fx"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Simple zero-configuration command-line HTTP server
+brew "http-server"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
+# NCurses Disk Usage
+brew "ncdu"
 # Wrapper around ripgrep that adds multiple rich file types
 brew "ripgrep-all"
 # Cross-shell prompt for astronauts
@@ -20,50 +32,60 @@ brew "xdg-ninja"
 brew "zoxide"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Command-line interface for 1Password
+cask "1password-cli"
+# Utility to add Dynamic Island like features to notch area
+cask "alcove"
 # Chromium based browser
 cask "arc"
+# Data backup and storage service
+cask "backblaze"
+# Anthropic's official Claude AI desktop app
+cask "claude"
+# Screen capturing tool
+cask "cleanshot"
+# Multi-platform client-side cloud file encryption tool
+cask "cryptomator"
+# Convert potentially dangerous PDFs or Office documents into safe PDFs
+cask "dangerzone"
+cask "font-fira-code-nerd-font"
+cask "font-fira-mono-nerd-font"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Client for the Google Drive storage service
+cask "google-drive"
+# Discover, download, and run local LLMs
+cask "lm-studio"
+# Screen and video recording software
+cask "loom"
+# Open-source firewall to block unknown outgoing connections
+cask "lulu"
+# App to write, plan, collaborate, and get organised
+cask "notion"
+# Monitors computer mic and webcam
+cask "oversight"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Store SSH keys in the Secure Enclave
 cask "secretive"
+# Instant messaging application focusing on security
+cask "signal"
+# Team communication and collaboration software
+cask "slack"
+# Video game digital distribution service
+cask "steam"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
+# Virtual machines UI using QEMU
+cask "utm"
 # Open-source code editor
 cask "visual-studio-code"
-
-
-cask "1password", args: { appdir: "/Applications" }
-cask "1password-cli", args: { appdir: "/Applications" }
-cask "alcove"
-cask "arc"
-cask "backblaze", args: { appdir: "/Applications" }
-cask "cleanshot", args: { appdir: "/Applications" }
-cask "cryptomator"
-cask "dangerzone"
-cask "font-fira-code-nerd-font", args: { appdir: "/Applications" }
-cask "font-fira-mono-nerd-font", args: { appdir: "/Applications" }
-cask "ghostty"
-cask "google-drive", args: { appdir: "/Applications" }
-
-cask "loom"
-cask "lulu", args: { appdir: "/Applications" }
-cask "notion", args: { appdir: "/Applications" }
-
-cask "oversight"
-cask "raycast", args: { appdir: "/Applications" }
-cask "secretive"
-
-cask "signal", args: { appdir: "/Applications" }
-cask "slack", args: { appdir: "/Applications" }
-cask "steam"
-
-cask "tailscale-app"
-cask "utm"
-cask "lm-studio"
-cask "claude"
-
-cask "visual-studio-code", args: { appdir: "/Applications" }
-cask "vlc", args: { appdir: "/Applications" }
-cask "zoom", args: { appdir: "/Applications" }
+# Multimedia player
+cask "vlc"
+# Video communication and virtual meeting platform
+cask "zoom"
+vscode "anthropic.claude-code"
+vscode "remoteoss.dexter-lsp"
+vscode "tekumara.typos-vscode"
