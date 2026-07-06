@@ -7,12 +7,14 @@
 "~/src/dotfiles" = { url = "git@github.com:gordalina/dotfiles.git", ref = "main" }
 
 [dotfiles]
+"~/.Brewfile" = { source = "~/src/dotfiles/Brewfile" }
+"~/.agents" = {}
+"~/.claude" = {}
 "~/.config" = {}
 "~/.hushlogin" = {}
 "~/.ssh" = {}
 "~/.zshenv" = {}
 "~/bin" = {}
-"~/.Brewfile" = { source = "~/src/dotfiles/Brewfile" }
 
 [settings]
 experimental = true
