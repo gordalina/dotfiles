@@ -1,5 +1,4 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+# zmodload zsh/zprof
 
 # XDG
 export XDG_DATA_HOME=$HOME/.local/share
@@ -13,16 +12,13 @@ export ZSH="$XDG_DATA_HOME/oh-my-zsh"
 export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump"
 export HIST_STAMPS="yyyy-mm-dd"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
 for file in ~/.config/zsh/zsh.d/*.zsh; do
   [ -f "$file" ] && source "$file"
 done
+
+# Compile zshrc
+if [[ ! -f ~/.config/zsh/.zshrc.zwc || ~/.config/zsh/.zshrc -nt ~/.config/zsh/.zshrc.zwc ]]; then
+  zcompile ~/.config/zsh/.zshrc
+fi
+
+# zprof

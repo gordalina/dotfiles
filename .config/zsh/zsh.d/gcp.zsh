@@ -1,2 +1,4 @@
-source "$(brew --prefix)/Caskroom/gcloud-cli/latest/google-cloud-sdk/completion.zsh.inc"
-source "$(brew --prefix)/Caskroom/gcloud-cli/latest/google-cloud-sdk/path.zsh.inc"
+gcloud_sdk="/opt/homebrew/Caskroom/gcloud-cli/latest/google-cloud-sdk"
+
+source "$gcloud_sdk/completion.zsh.inc"
+source "$gcloud_sdk/path.zsh.inc"

@@ -1,4 +1,4 @@
-ommand_timeout = 1000
+command_timeout = 1000
 format = """
 ${custom.arch}\
 ${custom.kubernetes}\
@@ -18,9 +18,9 @@ disabled = true
 disabled = true
 
 [custom.gcloud]
-command = 'gcloud config get project'
+command = '''sed -n 's/^project = //p' ~/.config/gcloud/configurations/config_$(cat ~/.config/gcloud/active_config 2>/dev/null)'''
 format = 'on [$output](bright-blue bold) '
-when = '''test "$(gcloud config get project)" != "gordalina"'''
+when = '''p="$(sed -n 's/^project = //p' ~/.config/gcloud/configurations/config_$(cat ~/.config/gcloud/active_config 2>/dev/null))"; test -n "$p" -a "$p" != "gordalina"'''
 
 [git_branch]
 symbol = ""
@@ -29,9 +29,10 @@ symbol = ""
 disabled = true
 
 [custom.kubernetes]
-command = "kubectl config current-context"
+# Read current-context from the kubeconfig file instead of forking `kubectl`.
+command = '''sed -n 's/^current-context: //p' "${KUBECONFIG:-$HOME/.kube/config}"'''
 format = "[$output](green bold) "
-when = '''test "$(kubectl config current-context)" != "kind"'''
+when = '''c="$(sed -n 's/^current-context: //p' "${KUBECONFIG:-$HOME/.kube/config}")"; test -n "$c" -a "$c" != "kind"'''
 
 [status]
 disabled = false

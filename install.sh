@@ -15,9 +15,6 @@ mise bootstrap
 echo "› applying defaults"
 bin/dot
 
-echo "› install oh-my-zsh"
-ZSH=~/.local/share/oh-my-zsh RUNZSH=no KEEP_ZSHRC=YES sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 echo "› brew install"
 brew bundle
 
