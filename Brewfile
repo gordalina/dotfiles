@@ -1,3 +1,6 @@
+tap "zdk/tools"
+# Microsoft Azure CLI 2.0
+brew "azure-cli"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Manage your dotfiles across multiple diverse machines, securely
@@ -6,6 +9,8 @@ brew "chezmoi"
 brew "duti"
 # Modern, maintained replacement for ls
 brew "eza"
+# Command-line tools for fly.io services
+brew "flyctl"
 # Terminal JSON viewer
 brew "fx"
 # Command-line fuzzy finder written in Go
@@ -18,6 +23,8 @@ brew "git"
 brew "http-server"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "k9s"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
 # NCurses Disk Usage
@@ -30,6 +37,8 @@ brew "starship"
 brew "xdg-ninja"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Low-fat command output for LLM environments
+brew "zdk/tools/lowfat", trusted: true
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
@@ -44,6 +53,8 @@ cask "backblaze"
 cask "claude"
 # Screen capturing tool
 cask "cleanshot"
+# Ghostty-based terminal with vertical tabs and notifications for AI coding agents
+cask "cmux"
 # Multi-platform client-side cloud file encryption tool
 cask "cryptomator"
 # Convert potentially dangerous PDFs or Office documents into safe PDFs
@@ -64,8 +75,12 @@ cask "loom"
 cask "lulu"
 # App to write, plan, collaborate, and get organised
 cask "notion"
+# Replacement for Docker Desktop
+cask "orbstack"
 # Monitors computer mic and webcam
 cask "oversight"
+# GUI client for PostgreSQL databases
+cask "postico"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Store SSH keys in the Secure Enclave
@@ -84,6 +99,8 @@ cask "utm"
 cask "visual-studio-code"
 # Multimedia player
 cask "vlc"
+# Multiplayer code editor
+cask "zed"
 # Video communication and virtual meeting platform
 cask "zoom"
 vscode "anthropic.claude-code"
