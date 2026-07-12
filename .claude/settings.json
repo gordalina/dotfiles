@@ -1,0 +1,54 @@
+{
+  "apiKeyHelper": "op read 'op://Private/ANTHROPIC_API_KEY/password'",
+  "permissions": {
+    "allow": [],
+    "defaultMode": "auto"
+  },
+  "model": "opus[1m]",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "lowfat hook"
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Resources/Sounds/ActionsAvailable.aiff"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Resources/Sounds/AttachmentEnd.aiff"
+          }
+        ]
+      }
+    ]
+  },
+  "effortLevel": "high",
+  "theme": "dark",
+  "switchModelsOnFlag": true,
+  "skipAutoPermissionPrompt": true,
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@context7/mcp"
+      ]
+    }
+  }
+}
