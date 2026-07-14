@@ -248,9 +248,6 @@ chflags nohidden ~/Library
 sudo chflags nohidden /Volumes
 
 # configure default app for extensions
-extensions=(js jsx ts tsx json ex exs eex tf csv yml yaml xml c cpp h php)
-for ext in ${extensions[@]}; do
-  duti -s com.microsoft.VSCode $ext all
-done
+duti ~/.config/duti/duti.conf
 
 killall Finder Dock SystemUIServer
