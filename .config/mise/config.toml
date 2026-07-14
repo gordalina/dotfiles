@@ -3,9 +3,6 @@
 #"brew:ffmpeg" = "latest"
 #"mas:497799835" = "latest"
 
-[bootstrap.repos]
-"~/src/dotfiles" = { url = "git@github.com:gordalina/dotfiles.git", ref = "main" }
-
 [dotfiles]
 "~/.Brewfile" = { source = "~/src/dotfiles/Brewfile" }
 "~/.agents" = {}
