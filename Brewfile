@@ -106,3 +106,5 @@ cask "zoom"
 vscode "anthropic.claude-code"
 vscode "remoteoss.dexter-lsp"
 vscode "tekumara.typos-vscode"
+
+mas "Toggl Track", id: 1291898086
