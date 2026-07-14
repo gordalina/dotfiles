@@ -4,3 +4,4 @@ alias cat=bat
 alias ls=eza
 
 alias gs="git status"
+alias gp="git push"
