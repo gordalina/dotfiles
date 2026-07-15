@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Reads ANTHROPIC_API_KEY from macOS Keychain.
+# Re-seeds from 1Password once a day; otherwise serves from Keychain.
+
+set -euo pipefail
+
+SERVICE="anthropic-api-key"
+ACCOUNT="$USER"
+OP_ITEM="op://Private/ANTHROPIC_API_KEY/password"
+STAMP="${XDG_CACHE_HOME:-$HOME/.cache}/anthropic-api-key-helper/last-refresh"
+
+# Serve from Keychain if it's present and was refreshed within the last day.
+if [ -n "$(find "$STAMP" -mtime -1 2>/dev/null)" ] &&
+  KEY=$(security find-generic-password -a "$ACCOUNT" -s "$SERVICE" -w 2>/dev/null); then
+  echo -n "$KEY"
+  exit 0
+fi
+
+# Stale or missing — pull from 1Password and re-seed
+KEY=$(op read --no-newline "$OP_ITEM")
+
+if [ -z "$KEY" ]; then
+  echo "Failed to read key from 1Password" >&2
+  exit 1
+fi
+
+security add-generic-password -a "$ACCOUNT" -s "$SERVICE" -w "$KEY" -T "" -U
+
+mkdir -p "$(dirname "$STAMP")"
+: >"$STAMP"
+
+echo -n "$KEY"
