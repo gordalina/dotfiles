@@ -5,3 +5,11 @@ alias ls=eza
 
 alias gs="git status"
 alias gp="git push"
+
+alias /="cd /"
+alias ~="cd"
+alias ..="cd .."
+alias ...="cd ..."
+alias ....="cd ...."
+alias .....="cd ....."
+alias mkcd="cd $(mktemp -d)"
