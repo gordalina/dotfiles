@@ -1,5 +1,6 @@
 {
   "trustedformulae": [
+    "tierrun/tap/tier",
     "zdk/tools/lowfat"
   ]
 }
