@@ -1,1 +1,2 @@
 export EDITOR="code --wait"
+export MIX_OS_DEPS_COMPILE_PARTITION_COUNT=$((($(getconf _NPROCESSORS_ONLN)+1)/2))
