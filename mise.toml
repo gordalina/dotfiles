@@ -4,14 +4,16 @@
 #"mas:497799835" = "latest"
 
 [dotfiles]
-"~/.Brewfile" = { source = "~/src/dotfiles/Brewfile" }
-"~/.agents" = {}
-"~/.claude" = {}
-"~/.config" = {}
-"~/.hushlogin" = {}
-"~/.ssh" = {}
-"~/.zshenv" = {}
 "~/bin" = {}
+"~/.config" = {}
+
+"~/.Brewfile" = { source = "~/src/dotfiles/Brewfile" }
+"~/.agents" = { source = "~/src/dotfiles/.config/agents" }
+"~/.claude" = { source = "~/src/dotfiles/.config/claude" }
+"~/.hushlogin" = { source = "~/src/dotfiles/.config/.hushlogin" }
+"~/.pi" = { source = "~/src/dotfiles/.config/pi" }
+"~/.ssh" = { source = "~/src/dotfiles/.config/ssh" }
+"~/.zshenv" = { source = "~/src/dotfiles/.config/.zshenv" }
 
 [bootstrap.macos.launchd.agents.mise-upgrade]
 program = "/opt/homebrew/bin/mise"

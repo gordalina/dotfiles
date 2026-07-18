@@ -1,5 +1,6 @@
 {
   "trustedformulae": [
+    "azure/kubelogin/kubelogin",
     "tierrun/tap/tier",
     "zdk/tools/lowfat"
   ]
