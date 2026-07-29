@@ -1,0 +1,42 @@
+[bootstrap.packages]
+"brew:mas" = "latest"
+"mas:1289583905" = "latest" # Pixelmator Pro
+
+[dotfiles]
+"~/bin" = {}
+"~/.config" = {}
+
+"~/.Brewfile" = { source = "~/src/dotfiles/Brewfile" }
+"~/.agents" = { source = "~/src/dotfiles/.config/agents" }
+"~/.claude" = { source = "~/src/dotfiles/.config/claude" }
+"~/.codex" = { source = "~/src/dotfiles/.config/codex" }
+"~/.hushlogin" = { source = "~/src/dotfiles/.config/.hushlogin" }
+"~/.pi" = { source = "~/src/dotfiles/.config/pi" }
+"~/.ssh" = { source = "~/src/dotfiles/.config/ssh" }
+"~/.zshenv" = { source = "~/src/dotfiles/.config/.zshenv" }
+
+[bootstrap.macos.launchd.agents.mise-upgrade]
+program = "/opt/homebrew/bin/mise"
+args = ["upgrade"]
+start_calendar_interval = { hour = 5, minute = 30 }
+environment = { PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" }
+stdout_path = "~/Library/Logs/mise-upgrade.log"
+stderr_path = "~/Library/Logs/mise-upgrade.log"
+
+[settings]
+experimental = true
+dotfiles.root = "~/src/dotfiles"
+dotfiles.default_mode = "symlink"
+minimum_release_age_excludes = ["claude-code"]
+
+[tools]
+claude-code = "latest"
+elixir = "1.19.5"
+erlang = "28.5.0.3"
+typos = "latest"
+
+"npm:skills" = "latest"
+"npm:agent-browser" = "latest"
+
+[tasks]
+bootstrap = "agent-browser install"
