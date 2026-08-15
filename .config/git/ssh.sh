@@ -4,7 +4,16 @@
 set -euo pipefail
 
 email=$(git config user.email 2>/dev/null || true)
-key=$(ssh-add -L 2>/dev/null | awk -v e="$email" '$NF == e { print; exit }' || true)
+
+# Ask the agent this host actually uses, not the ambient one. A host with its own
+# IdentityAgent (1Password, per-repo config.local) must keep its own keys.
+agent=$(ssh -G "$@" 2>/dev/null | sed -n 's/^identityagent //p' | head -1)
+case "$agent" in
+    SSH_AUTH_SOCK | "") agent=${SSH_AUTH_SOCK-} ;;
+    none) agent= ;;
+esac
+
+key=$(SSH_AUTH_SOCK=$agent ssh-add -L 2>/dev/null | awk -v e="$email" '$NF == e { print; exit }' || true)
 
 [ -n "$key" ] || exec ssh "$@"
 
