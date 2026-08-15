@@ -15,14 +15,9 @@ git clone https://github.com/gordalina/dotfiles ~/src/dotfiles
 cd ~/src/dotfiles
 
 echo "› bootstrap dotfiles"
-brew install mise --yes
+curl https://mise.run | sh
 mise bootstrap
-
-echo "› applying defaults"
-bin/dot
-
-echo "› brew install"
-brew bundle
+mise bootstrap:once
 
 echo "› all done!"
 

@@ -25,8 +25,6 @@ brew "http-server"
 brew "jq"
 # Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
-# Polyglot runtime manager (asdf rust clone)
-brew "mise"
 # NCurses Disk Usage
 brew "ncdu"
 # Wrapper around ripgrep that adds multiple rich file types
@@ -53,8 +51,6 @@ cask "backblaze"
 cask "claude"
 # Screen capturing tool
 cask "cleanshot"
-# Ghostty-based terminal with vertical tabs and notifications for AI coding agents
-cask "cmux"
 # Multi-platform client-side cloud file encryption tool
 cask "cryptomator"
 # Convert potentially dangerous PDFs or Office documents into safe PDFs
