@@ -1,0 +1,1 @@
+[ -f ~/.localrc ] && source ~/.localrc
