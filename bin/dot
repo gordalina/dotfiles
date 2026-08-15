@@ -1,14 +1,23 @@
 #!/usr/bin/env sh
 
+# Full Disk Access is needed to write sandboxed preferences.
+# TCC.db is world-readable but blocked by TCC, and always exists.
+until head -c 1 "/Library/Application Support/com.apple.TCC/TCC.db" > /dev/null 2>&1; do
+  echo "Grant Full Disk Access to $TERM_PROGRAM, then press Enter."
+  echo "If macOS asks to quit the app, re-run this script after."
+  open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+  read -r _
+done
+
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
 # Enable TouchID for sudo
-sed "s/^#auth/auth/" /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local
+sed "s/^#auth/auth/" /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local > /dev/null
 
 # Disable Gatekeeper
-sudo spctl --master-disable
+sudo spctl --master-disable  > /dev/null
 
 # Enable firewall
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
@@ -137,15 +146,10 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 
-# Hide Safari's bookmark bar.
-defaults write com.apple.Safari ShowFavoritesBar -bool false
-
 # Set up Safari for development.
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 # Remove spotlight default shortcuts
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/></dict>'
