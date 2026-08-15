@@ -1,7 +1,10 @@
 [user]
     name = Samuel Gordalina
     email = samuel.gordalina@gmail.com
-    signingKey = ~/.ssh/id_secretive.pub
+    signingKey = agent
+
+[core]
+    sshCommand = ~/.config/git/ssh.sh
 
 [commit]
     gpgSign = true
@@ -23,8 +26,8 @@
     format = ssh
 
 [gpg "ssh"]
-    allowedSignersFile = ~/.ssh/id_secretive.pub
-    program = ~/.ssh/git-signing-wrapper.sh
+    allowedSignersFile =  ~/.config/git/allowed_signers
+    program = ~/.config/git/sign.sh
 
 [alias]
     unstash = "stash pop"
