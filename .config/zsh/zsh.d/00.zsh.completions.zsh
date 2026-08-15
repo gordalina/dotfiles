@@ -1,5 +1,11 @@
 autoload -Uz compinit
 
+# Allow completion from within a word/phrase
+setopt COMPLETE_IN_WORD 
+
+# When completing from the middle of a word, move the cursor to the end of the word
+setopt ALWAYS_TO_END            
+
 # Use a single dump file for both the freshness check and compinit itself.
 # Rebuild (with the compaudit security scan) at most once a day; otherwise
 # trust the cached dump and skip the audit.
