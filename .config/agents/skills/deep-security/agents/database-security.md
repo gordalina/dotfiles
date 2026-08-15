@@ -1,0 +1,20 @@
+# Lens: Database Security  (key: database-security)
+
+**Mandate:** the **persistence layer** as a security surface — Postgres + SQLAlchemy + Alembic, where **tenant/matter isolation is the product's core security guarantee**. The injection lens owns route→sink taint and access-control owns endpoint authz; **you own the data layer**: the `crud/`, `db/`, `models/`, repository/DAO code, and the Alembic migrations. Confirm that *every query enforces isolation at the data layer* and that schema/migrations/privileges don't quietly weaken the security model.
+
+## Hunt for (data-layer specific)
+
+- **Tenant / row-isolation leaks (the #1 for this app).** `crud/` queries that fetch/update/delete **without scoping to the caller's `matter_uuid` / `org` / tenant** → cross-matter/cross-tenant data access (data-layer IDOR). **Soft-delete read leaks** — queries that don't filter `deleted_at`/`is_deleted` and return logically-deleted rows. `get_by_*`/`get_by_id` that trust a client UUID with no ownership predicate. Bulk/list queries missing the tenant filter. Compare sibling crud functions — one scopes, one doesn't. CWE-639 / CWE-863 / CWE-566.
+- **Deep SQL injection at the data layer.** Raw `sa.text()` / `session.execute()` / `op.execute()` with interpolated/f-string input; **dynamic table/column/`ORDER BY` identifiers** from input (parameterization can't protect identifiers); JSONB key/path built from input. CWE-89 / CWE-943.
+- **ORM mass-assignment.** `Model(**request_dict)` / `.values(**dict)` / `update().values(payload)` that can set **privileged or isolation columns** (`is_admin`, `role`, `matter_uuid`, `org_id`, `owner_id`) from client-controlled keys with no column allow-list. CWE-915.
+- **Migration safety (Alembic).** Migrations that **weaken a security invariant**: drop a UNIQUE/FK/CHECK/NOT NULL constraint the app relies on, **disable RLS**, broaden a `GRANT`, or `op.execute()` raw/dynamic SQL. Destructive `DROP`/`ALTER` without guards; data migrations that copy across tenants. CWE-89 / CWE-732.
+- **Privilege & schema (least-privilege).** App connecting as **superuser/table-owner** instead of a least-privilege role; **RLS not enabled** where isolation depends only on app-layer filters (defense-in-depth gap that turns one missing filter into a breach); `SECURITY DEFINER` functions with a mutable `search_path`; `GRANT ... TO PUBLIC`; permissive default privileges. CWE-732 / CWE-250 / CWE-266.
+- **Data-at-rest.** PII/secrets/tokens stored **plaintext or reversibly** where hashing/column-encryption is warranted; credentials in connection strings persisted to DB; reversible storage of values that should be one-way. CWE-312 / CWE-311 / CWE-256.
+- **Connection & query-log hygiene.** DB connections without **cert verification** (`ssl=require` vs `verify-full`); statement/parameter logging that writes query values (PII) to logs; secrets in DSNs. CWE-319 / CWE-532.
+- **Integrity / TOCTOU.** Security invariants enforced only in app code with **no backing DB constraint** (FK/unique/check); check-then-insert races on uniqueness/ownership. CWE-362.
+
+## Method
+Enumerate the `crud/`, `db/`, `models/`, and `alembic/`/migrations trees (grep: `select(`, `session.execute`, `sa.text`, `.values(`, `op.execute`, `GRANT`, `SECURITY DEFINER`, `matter_uuid`, `deleted_at`, `RLS`, `create_engine`, `connect_args`). For **each** read/write: does it filter by tenant AND soft-delete? is any identifier/value client-controlled and interpolated? For **each migration**: does it weaken an invariant? For schema/roles: least-privilege + RLS. The finding is the *missing data-layer enforcement*, not a route-level issue (hand those to injection/access-control, but DO confirm whether the data layer is the last line of defense).
+
+## Output (per the shared contract)
+Assign a **`cwe`** (OWASP web category derives from it). Web OWASP for these lands in A01 (broken access control / tenant leaks), A03/A05 (injection), A02/A04 (data-at-rest). `tool: ["AI:database-security"]`. Leave `owasp_llm` null. Note in `verification_note` whether DB-level enforcement (RLS/constraint/FK) exists as a backstop — its absence raises severity.

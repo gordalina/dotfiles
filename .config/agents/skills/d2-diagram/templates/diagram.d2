@@ -1,0 +1,65 @@
+# House-style D2 skeleton — copy, rename, fill in. Render with ../scripts/render.sh
+# The classes block below IS the house style; keep it as-is and reuse the classes.
+
+direction: right
+
+classes: {
+  # leaf node — white card, soft shadow, rounded. One icon each.
+  node:      { style: { fill: "#ffffff"; stroke: "#cbd5e1"; stroke-width: 1; border-radius: 8; shadow: true; font-size: 14 } }
+  # plane containers — tint carries meaning (blue = new/proposed, green = unchanged/certified)
+  plane_a:   { style: { fill: "#f4f8fd"; stroke: "#3b6ea5"; stroke-width: 2; border-radius: 16; font-size: 17; bold: true } }
+  plane_b:   { style: { fill: "#f1f8f3"; stroke: "#4b8f5f"; stroke-width: 2; border-radius: 16; font-size: 17; bold: true } }
+  # decision-pending / out-of-scope / conditional — dashed, muted
+  gated:     { style: { fill: "#f7f8fa"; stroke: "#98a0ab"; stroke-width: 1; stroke-dash: 5; border-radius: 8; font-size: 12 } }
+  # edges
+  main:      { style: { stroke: "#2f6099"; stroke-width: 2; font-size: 12 } }
+  dim:       { style: { stroke: "#98a0ab"; stroke-width: 1; stroke-dash: 4; font-size: 11 } }
+}
+
+title: "System — Target Flow" { near: top-center; shape: text; style.font-size: 30; style.bold: true }
+
+# ---- SOURCE plane ----
+source: "SOURCE" {
+  class: plane_a
+  # icon: icons/kubernetes.svg
+  a: "Service A" { class: node }  # icon: icons/fastapi.svg
+  b: "Service B" { class: node }
+}
+
+# ---- MIDDLE (single node example) ----
+gateway: "Gateway" { class: node }  # icon: icons/...
+
+# ---- BACKEND plane ----
+backend: "BACKEND" {
+  class: plane_a
+  x: "Capability X" { class: node }
+  y: "Capability Y" { class: node }
+}
+
+# ---- unchanged / certified plane ----
+other: "UNCHANGED PLANE" {
+  class: plane_b
+  p: P { class: node }
+  q: Q { class: node }
+  p -> q: { class: main }
+}
+
+gated_opt: "decision pending" { class: gated }
+
+# ==== FLOWS: label every edge; collapse same-data fan-outs into one edge into the container ====
+source -> gateway: "requests" { class: main }
+gateway -> backend: "traces · metrics · logs" { class: main }   # one edge into the container, not one per capability
+source -> other.p: "audit events" { class: main }
+gateway -> gated_opt: "if approved" { class: dim }
+
+# ==== LEGEND: decode colors + line styles ====
+legend: LEGEND {
+  near: bottom-center
+  grid-columns: 4
+  grid-gap: 24
+  style: { fill: "#ffffff"; stroke: "#cbd5e1"; border-radius: 8; font-size: 13 }
+  k1: "Plane A (new)"            { style: { fill: "#f4f8fd"; stroke: "#3b6ea5"; border-radius: 6 } }
+  k2: "Plane B (unchanged)"      { style: { fill: "#f1f8f3"; stroke: "#4b8f5f"; border-radius: 6 } }
+  k3: "Active flow"              { style: { fill: "#ffffff"; stroke: "#2f6099"; stroke-width: 2; border-radius: 6 } }
+  k4: "Decision / out-of-scope"  { style: { fill: "#f7f8fa"; stroke: "#98a0ab"; stroke-dash: 5; border-radius: 6 } }
+}
