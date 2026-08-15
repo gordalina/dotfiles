@@ -10,6 +10,7 @@
 "~/.agents" = { source = "~/src/dotfiles/.config/agents" }
 "~/.claude" = { source = "~/src/dotfiles/.config/claude" }
 "~/.hushlogin" = { source = "~/src/dotfiles/.config/.hushlogin" }
+"~/.orca" = { source = "~/src/dotfiles/.config/orca" }
 "~/.ssh" = { source = "~/src/dotfiles/.config/ssh" }
 "~/.zshenv" = { source = "~/src/dotfiles/.config/.zshenv" }
 "~/Downloads/.DS_Store" = { source = "~/src/dotfiles/Downloads/.DS_Store" }
@@ -43,6 +44,9 @@ erlang = "28"
 go = "1.26"
 node = "26"
 typos = "latest"
+
+kubectl = "1.35"
+kubectx = "latest"
 
 "npm:skills" = "latest"
 "npm:agent-browser" = "latest"
