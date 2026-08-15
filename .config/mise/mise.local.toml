@@ -1,5 +1,0 @@
-[bootstrap.repos]
-"~/src/smstoslack/api/main" = { url = "git@github.com:smstoslack/api.git", ref = "main" }
-"~/src/smstoslack/support" = { url = "git@github.com:smstoslack/support.git", ref = "main" }
-"~/src/smstoslack/wiki" = { url = "git@github.com:smstoslack/support.git", ref = "main" }
-"~/src/zippys/website/prod" = { url = "git@ssh.dev.azure.com:v3/zippys/zip-serve/zippys-website", ref = "prod" }
