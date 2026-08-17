@@ -18,7 +18,7 @@
 [bootstrap.macos.launchd.agents.mise-upgrade]
 program = "/opt/homebrew/bin/mise"
 args = ["upgrade"]
-start_calendar_interval = { hour = 5, minute = 30 }
+start_calendar_interval = [{ hour = 6, minute = 0 }, { hour = 15, minute = 0 }]
 environment = { PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" }
 stdout_path = "~/Library/Logs/mise-upgrade.log"
 stderr_path = "~/Library/Logs/mise-upgrade.log"
