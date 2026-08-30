@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+set -e
+
+reset="\033[0m"
+green="\033[0;32m"
+yellow="\033[1;33m"
+
+instance_name=vpn
+port=1080
+host="${host:-localhost}"
+zone="${1:-us-west1-a}"
+
+ssh_pid=""
+pac_pid=""
+
+export CLOUDSDK_CORE_PROJECT=gordalina
+export CLOUDSDK_COMPUTE_REGION=$(cut -d'-' -f1,2 <<< "${zone}")
+export CLOUDSDK_COMPUTE_ZONE="${zone}"
+
+if ! gcloud compute zones list --format="get(name)" | grep -E "^${zone}$" > /dev/null
+then
+  echo "Error: Zone ${zone} not found."
+  exit 1
+fi
+
+echo -e "${green}Using project ${yellow}${CLOUDSDK_CORE_PROJECT}${green} on region ${yellow}${CLOUDSDK_COMPUTE_REGION}${green} and zone ${yellow}${CLOUDSDK_COMPUTE_ZONE}${reset}"
+
+start() {
+  if gcloud compute instances describe "${instance_name}" --verbosity=none > /dev/null; then
+    echo -e "${green}Starting VM ${yellow}${instance_name}${green}${reset}"
+    gcloud compute instances start "${instance_name}"
+  else
+    echo -e "${green}Creating VM ${yellow}${instance_name}${green}${reset}"
+
+    gcloud compute instances create "${instance_name}" \
+      --machine-type=e2-micro \
+      --preemptible
+  fi
+
+  ip=$(gcloud compute instances describe "${instance_name}" \
+    --format="get(networkInterfaces.accessConfigs[0].natIP)")
+
+  echo -en "${green}Connecting to ${yellow}${instance_name}${green} (${ip})."
+  while ! nc -z --apple-tcp-timeout 1 $ip 22; do
+    echo -n .
+  done
+
+  # ssh tunnel
+  gcloud compute ssh "${instance_name}" -- -D "${host}:${port}" -q -C -N &
+  ssh_pid=$!
+  echo -e "${green}SSH tunnel running on ${yellow}${host}:${port}${green} (${ssh_pid})${reset}"
+
+  # pac
+  SOCKS="${host}:${port}" pac &
+  pac_pid=$!
+  echo -e "${green}PAC running on ${yellow}http://${host}:1081/socks.pac${green} (${pac_pid})${reset}"
+
+  # wifi config
+  networksetup -setsocksfirewallproxy "Wi-Fi" "${host}" "${port}"
+  echo -e "${green}Configured Wi-Fi to use SOCKS proxy${reset}"
+
+  wait $ssh_pid
+  wait $pac_pid
+}
+
+stop() {
+  # socks
+  networksetup -setsocksfirewallproxystate "Wi-Fi" off
+  echo -e "${green}Disabled SOCKS on Wi-Fi${reset}"
+
+  # vm
+  gcloud compute instances stop "${instance_name}"
+  echo -e "${green}Shut down ${yellow}${instance_name}${reset}"
+
+  kill $ssh_pid 2> /dev/null || true
+  echo -e "${green}Shut down SSH Tunnel"
+
+  kill $pac_pid 2> /dev/null || true
+  echo -e "${green}Shut down PAC"
+}
+
+trap stop EXIT
+trap "echo CTRL+C" INT
+
+start
