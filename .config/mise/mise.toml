@@ -50,7 +50,6 @@ kubectx = "latest"
 
 "npm:skills" = "latest"
 "npm:agent-browser" = "latest"
-"go:meat.dev/cmd/meat" = "latest"
 
 [tasks]
 bootstrap = [
