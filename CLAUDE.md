@@ -15,7 +15,7 @@ or test suite — "running" this repo means applying config to the live machine.
   in the repo take effect. `dotfiles.default_mode = "symlink"`, so edits to repo files are
   live immediately for already-linked paths.
 - `bin/dot` — apply all macOS `defaults`/`scutil` system preferences. **Destructive and
-  sudo-heavy**: sets computer name, disables Gatekeeper, wipes the Dock, kills Finder/Dock.
+  sudo-heavy**: disables Gatekeeper, wipes the Dock, kills Finder/Dock.
   Only run on a machine intended to be configured as this workstation.
 - `brew bundle` — install everything in the top-level `Brewfile` (symlinked to `~/.Brewfile`).
 - `install.sh` — full first-run bootstrap for a fresh Mac (Xcode CLT → Homebrew → clone repo

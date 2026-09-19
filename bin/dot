@@ -26,12 +26,6 @@ sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
 # enable right click on mouse
 defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode TwoButton
 
-# Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "sg"
-sudo scutil --set HostName "sg"
-sudo scutil --set LocalHostName "sg"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "sg"
-
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
