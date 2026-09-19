@@ -50,6 +50,7 @@ kubectx = "latest"
 
 "npm:skills" = "latest"
 "npm:agent-browser" = "latest"
+"npm:@googleworkspace/cli" = "latest"
 
 [tasks]
 bootstrap = [
