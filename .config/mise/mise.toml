@@ -15,6 +15,14 @@
 "~/.zshenv" = { source = "~/src/dotfiles/.config/.zshenv" }
 "~/Downloads/.DS_Store" = { source = "~/src/dotfiles/Downloads/.DS_Store" }
 
+[bootstrap.macos.launchd.agents.mise-self-update]
+program = "/Users/sam/.local/bin/mise"
+args = ["self-update", "-y"]
+start_calendar_interval = { hour = 9, minute = 0 }
+environment = { PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" }
+stdout_path = "~/Library/Logs/mise-self-update.log"
+stderr_path = "~/Library/Logs/mise-self-update.log"
+
 [bootstrap.macos.launchd.agents.mise-upgrade]
 program = "/Users/sam/.local/bin/mise"
 args = ["upgrade"]
