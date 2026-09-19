@@ -53,7 +53,6 @@ fx = "latest"
 "npm:skills" = "latest"
 "npm:agent-browser" = "latest"
 "npm:@googleworkspace/cli" = "latest"
-"go:meat.dev/cmd/meat" = "latest"
 "aqua:slackapi/slack-cli" = "latest"
 
 [tasks]
