@@ -16,7 +16,7 @@
 "~/Downloads/.DS_Store" = { source = "~/src/dotfiles/Downloads/.DS_Store" }
 
 [bootstrap.macos.launchd.agents.mise-upgrade]
-program = "/opt/homebrew/bin/mise"
+program = "/Users/sam/.local/bin/mise"
 args = ["upgrade"]
 start_calendar_interval = [{ hour = 6, minute = 0 }, { hour = 15, minute = 0 }]
 environment = { PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" }
