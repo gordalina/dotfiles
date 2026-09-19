@@ -1,5 +1,6 @@
 .DS_Store
 
+.agents/
 **/.claude/settings.local.json
 config.local.toml
-.orca
+.orca/
