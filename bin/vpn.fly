@@ -15,6 +15,9 @@ REGION="${1:-}"
 EXIT_NODE_NAME="exit-node-${REGION}"
 SETUP=
 
+# Use the CLI of Tailscale.app. The Homebrew `tailscale` formula needs a tailscaled daemon that is not running.
+tailscale() { /Applications/Tailscale.app/Contents/MacOS/Tailscale "$@"; }
+
 usage() {
   cat <<EOF
 Usage: vpn <fly-region>
@@ -46,24 +49,16 @@ ${white}
     "tagOwners":     {"tag:exit-node": ["autogroup:admin"]},
     "autoApprovers": {"exitNode": ["tag:exit-node"]},
 ${gray}
-2. And create an auth key with: ${white}
-  - tag ${yellow}exit-node${reset}
-  - ephemeral
-  - use as exit node
-  - reusable authentication
-  - expiry with 90days ${gray}
-
-3. Update the secret in fly with your auth key:
-${white}
-    fly secrets set TS_AUTHKEY="tskey-auth-..." -a \$APP_NAME
-${gray}
-4. Build and deploy the image:
+2. Build and deploy the image:
 ${white}
     vpn deploy
 ${gray}
-5. Run as needed:
+3. Run as needed:
 ${white}
     vpn <region>
+${gray}
+   The first run in a region opens a Tailscale login page in the browser.
+   The node state stays on the Fly volume, so later runs do not log in.
 ${gray}
 ${green}
 Script usage
@@ -93,7 +88,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 DOCKERFILE
 
   echo -e "${yellow}deploy${reset}: Building and pushing image..."
-  fly deploy --build-only --image-label=latest --push -a "$APP_NAME"
+  fly deploy --build-only --no-cache --image-label=latest --push -a "$APP_NAME"
 
   echo -e "${yellow}deploy${reset}: Updating image on all machines..."
   fly image update --image "registry.fly.io/$APP_NAME:latest" --yes -a "$APP_NAME"
@@ -152,14 +147,26 @@ create_machine_in_region() {
 }
 
 wait_for_exit_node_visible() {
-  local timeout=60
+  local timeout=300
   local deadline=$((SECONDS + $timeout))
+  local url=""
 
   while (( SECONDS < deadline )); do
-    if tailscale status 2>/dev/null | grep -qF "$EXIT_NODE_NAME"; then
+    if tailscale status --json 2>/dev/null | jq -e --arg n "$EXIT_NODE_NAME" '.Peer // {} | any(.HostName == $n and .Online)' >/dev/null; then
       return 0
     fi
-    sleep 0.5
+
+    # A node without valid state prints a login URL. Open it one time.
+    if [[ -z "$url" ]]; then
+      url="$(fly logs -a "$APP_NAME" -m "$MACHINE_ID" --no-tail --json 2>/dev/null \
+        | jq -r --arg s "$STARTED_AT" 'select(.timestamp >= $s) | .message' \
+        | grep -oE 'https://login\.tailscale\.com/a/[[:alnum:]]+' | tail -1 || true)"
+      if [[ -n "$url" ]]; then
+        echo -e "${yellow}$REGION${reset}:${reset} Log in the node at ${green}$url${reset}"
+        open "$url"
+      fi
+    fi
+    sleep 2
   done
 
   echo -e "${yellow}$REGION${reset}:${reset} Timed out waiting for tailscale to see node ${green}$EXIT_NODE_NAME${reset} within ${timeout}s." >&2
@@ -176,8 +183,15 @@ teardown() {
 }
 
 bringup() {
+  if ! tailscale status >/dev/null 2>&1; then
+    echo -e "${yellow}$REGION${reset}:${reset} Tailscale is not connected. Connect Tailscale.app first." >&2
+    exit 1
+  fi
+
   trap teardown EXIT QUIT TERM
   trap "echo CTRL+C" INT
+
+  STARTED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
   if ! pick_existing_machine; then
     create_machine_in_region
