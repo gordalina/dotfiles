@@ -9,5 +9,5 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/gordalina/dotfiles/HEAD/in
 For a personal repo on a work computer, override it per repo:
 
 ```sh
-git config user.email samuel.gordalina@gmail.com
+git config user.email <email>
 ```
